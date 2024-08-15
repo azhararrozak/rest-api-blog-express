@@ -20,3 +20,6 @@ build/
 
 #Proxy
 .gitconfig
+
+#DS_Store
+.DS_Store
