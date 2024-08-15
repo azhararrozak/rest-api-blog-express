@@ -41,6 +41,7 @@ app.listen(PORT, () => {
 
 require('./src/routes/auth.routes')(app);
 require('./src/routes/user.routes')(app);
+require('./src/routes/post.routes')(app);
 
 async function initial() {
     try {
