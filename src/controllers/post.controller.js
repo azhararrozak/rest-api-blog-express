@@ -12,11 +12,10 @@ exports.create = async (req, res) => {
 
     // Create a Post
     const post = new Post({
-      user_id: req.body.user_id,
+      author: req.body.author,
       title: req.body.title,
       content: req.body.content,
-      status: req.body.status,
-      category: req.body.category,
+      categories: req.body.category,
     });
 
     // Save Post in the database
@@ -30,10 +29,7 @@ exports.create = async (req, res) => {
 // Retrieve all Posts from the database.
 exports.findAll = async (req, res) => {
   try {
-    const title = req.query.title;
-    let condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
-    const posts = await Post.find(condition).populate("category", "-__v");
+    const posts = await Post.find().populate("category", "-__v");
     res.send(posts);
   } catch (err) {
     res.status(500).send({ message: err.message });
