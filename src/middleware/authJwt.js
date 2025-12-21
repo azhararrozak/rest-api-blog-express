@@ -1,29 +1,28 @@
-const jwt = require("jsonwebtoken");
-const db = require("../models");
+import jwt from "jsonwebtoken";
+import db from "../models/index.js";
+
 const User = db.user;
 const Role = db.role;
 
-verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
   if (!token) {
     return res.status(403).send({ message: "No token provided!" });
   }
 
-  jwt.verify(token,
-            process.env.JWT_SECRET,
-            (err, decoded) => {
-              if (err) {
-                return res.status(401).send({
-                  message: "Unauthorized!",
-                });
-              }
-              req.userId = decoded.id;
-              next();
-            });
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).send({
+        message: "Unauthorized!",
+      });
+    }
+    req.userId = decoded.id;
+    next();
+  });
 };
 
-isAdmin = async (req, res, next) => {
+const isAdmin = async (req, res, next) => {
   try {
     const user = await User.findById(req.userId);
 
@@ -48,6 +47,7 @@ isAdmin = async (req, res, next) => {
 
 const authJwt = {
   verifyToken,
-  isAdmin
+  isAdmin,
 };
-module.exports = authJwt;
+
+export default authJwt;

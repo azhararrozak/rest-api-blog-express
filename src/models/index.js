@@ -1,16 +1,20 @@
- const mongoose = require("mongoose");
- mongoose.Promise = global.Promise;
+import mongoose from "mongoose";
+import User from "./user.model.js";
+import Role from "./role.model.js";
+import RefreshToken from "./refreshtoken.model.js";
+import Post from "./post.model.js";
+import Category from "./category.model.js";
 
- const db = {};
+mongoose.Promise = global.Promise;
 
- db.mongoose = mongoose;
+const db = {};
 
- db.user = require("./user.model");
- db.role = require("./role.model");
- db.refreshToken = require("./refreshtoken.model"); 
- db.post = require("./post.model");
- db.category = require("./category.model");
+db.mongoose = mongoose;
+db.user = User;
+db.role = Role;
+db.refreshToken = RefreshToken;
+db.post = Post;
+db.category = Category;
+db.ROLES = ["user", "admin", "moderator"];
 
- db.ROLES = ["user", "admin"];
-
- module.exports = db;
+export default db;

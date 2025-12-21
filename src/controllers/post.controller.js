@@ -1,8 +1,9 @@
-const db = require("../models");
+import db from "../models/index.js";
+
 const Post = db.post;
 
 // Create and Save a new Post
-exports.create = async (req, res) => {
+export const create = async (req, res) => {
   try {
     // Validate request
     if (!req.body.title) {
@@ -27,7 +28,7 @@ exports.create = async (req, res) => {
 };
 
 // Retrieve all Posts from the database.
-exports.findAll = async (req, res) => {
+export const findAll = async (req, res) => {
   try {
     const posts = await Post.find().populate("category", "-__v");
     res.send(posts);
@@ -37,12 +38,13 @@ exports.findAll = async (req, res) => {
 };
 
 // Find a single Post with an id
-exports.findOne = async (req, res) => {
+export const findOne = async (req, res) => {
   try {
     const id = req.params.id;
     const post = await Post.findById(id).populate("category", "-__v");
 
-    if (!post) res.status(404).send({ message: "Not found Post with id " + id });
+    if (!post)
+      res.status(404).send({ message: "Not found Post with id " + id });
     else res.send(post);
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -50,10 +52,12 @@ exports.findOne = async (req, res) => {
 };
 
 // Update a Post by the id in the request
-exports.update = async (req, res) => {
+export const update = async (req, res) => {
   try {
     if (!req.body) {
-      return res.status(400).send({ message: "Data to update can not be empty!" });
+      return res
+        .status(400)
+        .send({ message: "Data to update can not be empty!" });
     }
 
     const id = req.params.id;
@@ -62,7 +66,8 @@ exports.update = async (req, res) => {
 
     const post = await Post.findById(id);
 
-    if (!post) res.status(404).send({ message: "Not found Post with id " + id });
+    if (!post)
+      res.status(404).send({ message: "Not found Post with id " + id });
     else res.send(post);
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -70,7 +75,7 @@ exports.update = async (req, res) => {
 };
 
 // Delete a Post with the specified id in the request
-exports.delete = async (req, res) => {
+export const remove = async (req, res) => {
   try {
     const id = req.params.id;
     await Post.findByIdAndRemove(id);

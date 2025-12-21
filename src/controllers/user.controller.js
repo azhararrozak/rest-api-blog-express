@@ -1,7 +1,7 @@
-exports.allAccess = (req, res) => {
+export const allAccess = (req, res) => {
   res.status(200).send("Public Content.");
-}
+};
 
-exports.adminOnly = (req, res) => {
+export const adminOnly = (req, res) => {
   res.status(200).send("Admin Content.");
-}
+};
