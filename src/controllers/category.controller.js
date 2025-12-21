@@ -38,6 +38,20 @@ export const findOne = async (req, res) => {
   }
 };
 
+// Find a single Category by slug
+export const findBySlug = async (req, res) => {
+  try {
+    const slug = req.params.slug;
+    const category = await Category.findOne({ slug });
+
+    if (!category)
+      res.status(404).send({ message: "Not found Category with slug " + slug });
+    else res.send(category);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 export const update = async (req, res) => {
   try {
     if (!req.body) {

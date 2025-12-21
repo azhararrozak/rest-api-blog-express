@@ -85,18 +85,21 @@ export const seedPosts = async () => {
       categoryMap[category.name] = category._id;
     });
 
-    const postsToInsert = posts.map((post) => ({
-      title: post.title,
-      content: post.content,
-      author: userMap[post.authorEmail],
-      categories: categoryMap[post.categoryName],
-      created_at: new Date(),
-    }));
+    // Save individually to trigger pre-save hook for slug generation
+    for (const postData of posts) {
+      const post = new Post({
+        title: postData.title,
+        content: postData.content,
+        author: userMap[postData.authorEmail],
+        categories: categoryMap[postData.categoryName],
+        created_at: new Date(),
+      });
+      await post.save();
+    }
 
-    await Post.insertMany(postsToInsert);
-    console.log("Posts seeded successfully");
+    console.log("✅ Posts seeded successfully");
   } catch (error) {
-    console.error("Error seeding posts:", error);
+    console.error("❌ Error seeding posts:", error);
     throw error;
   }
 };

@@ -6,7 +6,12 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "seed": "node src/seed/index.js"
+    "seed": "node src/seed/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "test:slug": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/__test__/slug.test.js",
+    "test:models": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/__test__/models.test.js"
   },
   "keywords": [],
   "author": "",
@@ -19,9 +24,13 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.5.3",
+    "slugify": "^1.6.6",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "@jest/globals": "^30.2.0",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.4",
+    "supertest": "^7.1.4"
   }
 }

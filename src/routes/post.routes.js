@@ -12,6 +12,7 @@ export default function (app) {
 
   app.post("/api/post", [authJwt.verifyToken], controller.create);
   app.get("/api/post", [authJwt.verifyToken], controller.findAll);
+  app.get("/api/post/slug/:slug", [authJwt.verifyToken], controller.findBySlug);
   app.get("/api/post/:id", [authJwt.verifyToken], controller.findOne);
   app.put("/api/post/:id", [authJwt.verifyToken], controller.update);
   app.delete("/api/post/:id", [authJwt.verifyToken], controller.remove);

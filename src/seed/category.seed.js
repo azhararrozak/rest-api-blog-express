@@ -39,10 +39,15 @@ export const seedCategories = async () => {
       return;
     }
 
-    await Category.insertMany(categories);
-    console.log("Categories seeded successfully");
+    // Save individually to trigger pre-save hook for slug generation
+    for (const categoryData of categories) {
+      const category = new Category(categoryData);
+      await category.save();
+    }
+
+    console.log("✅ Categories seeded successfully");
   } catch (error) {
-    console.error("Error seeding categories:", error);
+    console.error("❌ Error seeding categories:", error);
     throw error;
   }
 };

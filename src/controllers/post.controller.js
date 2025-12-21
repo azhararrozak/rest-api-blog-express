@@ -51,6 +51,22 @@ export const findOne = async (req, res) => {
   }
 };
 
+// Find a single Post by slug
+export const findBySlug = async (req, res) => {
+  try {
+    const slug = req.params.slug;
+    const post = await Post.findOne({ slug })
+      .populate("author", "username email -_id")
+      .populate("categories", "name slug description -_id");
+
+    if (!post)
+      res.status(404).send({ message: "Not found Post with slug " + slug });
+    else res.send(post);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 // Update a Post by the id in the request
 export const update = async (req, res) => {
   try {

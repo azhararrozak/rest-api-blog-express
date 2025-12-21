@@ -18,8 +18,19 @@ build/
 # Ignore personal configuration files (e.g., .env files containing secrets)
 .env
 
+# Ignore test coverage reports
+coverage/
+*.lcov
+
+# Ignore Jest cache
+.jest/
+
 #Proxy
 .gitconfig
 
 #DS_Store
 .DS_Store
+
+# README
+SLUG_FEATURE.md
+API_REFERENCE.md
