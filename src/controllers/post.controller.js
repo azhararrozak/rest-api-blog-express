@@ -30,7 +30,7 @@ export const create = async (req, res) => {
 // Retrieve all Posts from the database.
 export const findAll = async (req, res) => {
   try {
-    const posts = await Post.find().populate("category", "-__v");
+    const posts = await Post.find().populate("categories", "-__v");
     res.send(posts);
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -41,7 +41,7 @@ export const findAll = async (req, res) => {
 export const findOne = async (req, res) => {
   try {
     const id = req.params.id;
-    const post = await Post.findById(id).populate("category", "-__v");
+    const post = await Post.findById(id).populate("author categories", "-__v");
 
     if (!post)
       res.status(404).send({ message: "Not found Post with id " + id });
@@ -94,7 +94,8 @@ export const update = async (req, res) => {
 export const remove = async (req, res) => {
   try {
     const id = req.params.id;
-    await Post.findByIdAndRemove(id);
+
+    await Post.findByIdAndDelete(id);
 
     res.send({ message: "Post was deleted successfully!" });
   } catch (err) {

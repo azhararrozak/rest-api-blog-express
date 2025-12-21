@@ -7,6 +7,7 @@ import authRoutes from "./src/routes/auth.routes.js";
 import userRoutes from "./src/routes/user.routes.js";
 import postRoutes from "./src/routes/post.routes.js";
 import categoryRoutes from "./src/routes/category.routes.js";
+import commentRoutes from "./src/routes/comment.routes.js";
 
 dotenv.config();
 
@@ -49,6 +50,7 @@ authRoutes(app);
 userRoutes(app);
 postRoutes(app);
 categoryRoutes(app);
+commentRoutes(app);
 
 async function initial() {
   try {
