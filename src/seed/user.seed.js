@@ -48,9 +48,9 @@ export const seedUsers = async () => {
     }));
 
     await User.insertMany(usersToInsert);
-    console.log("✅ Users seeded successfully");
+    console.log("Users seeded successfully");
   } catch (error) {
-    console.error("❌ Error seeding users:", error);
+    console.error("Error seeding users:", error);
     throw error;
   }
 };

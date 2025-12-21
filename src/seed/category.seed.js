@@ -40,9 +40,9 @@ export const seedCategories = async () => {
     }
 
     await Category.insertMany(categories);
-    console.log("✅ Categories seeded successfully");
+    console.log("Categories seeded successfully");
   } catch (error) {
-    console.error("❌ Error seeding categories:", error);
+    console.error("Error seeding categories:", error);
     throw error;
   }
 };

@@ -94,9 +94,9 @@ export const seedPosts = async () => {
     }));
 
     await Post.insertMany(postsToInsert);
-    console.log("✅ Posts seeded successfully");
+    console.log("Posts seeded successfully");
   } catch (error) {
-    console.error("❌ Error seeding posts:", error);
+    console.error("Error seeding posts:", error);
     throw error;
   }
 };

@@ -9,11 +9,11 @@ dotenv.config();
 
 const runSeeds = async () => {
   try {
-    console.log("🌱 Starting database seeding...\n");
+    console.log("Starting database seeding...\n");
 
     // Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("✅ Connected to MongoDB\n");
+    console.log("Connected to MongoDB\n");
 
     // Run seeds in order (because of dependencies)
     await seedRoles();
@@ -24,7 +24,7 @@ const runSeeds = async () => {
     console.log("\n✨ Database seeding completed successfully!");
     process.exit(0);
   } catch (error) {
-    console.error("\n❌ Error during seeding:", error);
+    console.error("\nError during seeding:", error);
     process.exit(1);
   }
 };

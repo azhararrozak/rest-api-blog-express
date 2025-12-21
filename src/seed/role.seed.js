@@ -14,9 +14,9 @@ export const seedRoles = async () => {
     }
 
     await Role.insertMany(roles);
-    console.log("✅ Roles seeded successfully");
+    console.log("Roles seeded successfully");
   } catch (error) {
-    console.error("❌ Error seeding roles:", error);
+    console.error("Error seeding roles:", error);
     throw error;
   }
 };
