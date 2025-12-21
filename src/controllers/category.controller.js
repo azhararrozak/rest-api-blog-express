@@ -71,7 +71,7 @@ export const update = async (req, res) => {
 export const remove = async (req, res) => {
   try {
     const id = req.params.id;
-    await Category.findByIdAndRemove(id);
+    await Category.findOneAndDelete(id);
     res.send({ message: "Category was deleted successfully!" });
   } catch (err) {
     res.status(500).send({ message: err.message });
